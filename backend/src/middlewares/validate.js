@@ -12,7 +12,7 @@ const validate = (schema) => (req, res, next) => {
   } catch (error) {
     if (error instanceof ZodError) {
       // Zod validation errors — map to clean string
-      const errorMessage = error.errors
+      const errorMessage = error.issues
         .map((err) => `${err.path.slice(1).join('.')}: ${err.message}`)
         .join(', ');
       return next(new AppError(`Validation Error: ${errorMessage}`, 400));

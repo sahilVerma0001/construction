@@ -42,8 +42,8 @@ exports.createProject = async (req, res, next) => {
       data: { project },
     });
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return res.status(400).json({ status: 'fail', message: error.errors.map(e => e.message).join(', ') });
+    if (error.name === 'ZodError') {
+      return res.status(400).json({ status: 'fail', message: error.issues.map(e => e.message).join(', ') });
     }
     next(error);
   }
