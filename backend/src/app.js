@@ -34,6 +34,11 @@ app.use('/api/bids', bidRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/chats', chatRouter);
 
+// Health check route for Render
+app.get('/', (req, res) => {
+  res.status(200).json({ status: 'success', message: 'Nirmaan API is running smoothly!' });
+});
+
 // 3. UNHANDLED ROUTES
 app.use((req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
